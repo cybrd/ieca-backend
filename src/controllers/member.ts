@@ -12,6 +12,7 @@ import {
   deleteMember,
   getMemberById,
   getMembers,
+  getMembersCount,
   updateMember,
 } from "../services/member";
 import { deleteMemberActivityByMemberId } from "../services/member_activity";
@@ -23,6 +24,17 @@ memberController.get("/", (req, res) => {
     const result = await getMembers(db);
 
     res.json(result);
+  })().catch((err) => {
+    console.trace(err);
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+  });
+});
+
+memberController.get("/counts", (req, res) => {
+  (async () => {
+    const result = await getMembersCount(db);
+
+    res.json(result.count);
   })().catch((err) => {
     console.trace(err);
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
