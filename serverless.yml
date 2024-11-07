@@ -1,4 +1,4 @@
-service: scourge-api
+service: ieca-api
 
 plugins:
   - serverless-esbuild
